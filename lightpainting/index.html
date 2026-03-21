@@ -4,113 +4,318 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>The Light Painting Method — Consistent Creative</title>
+<meta name="description" content="A complete guide to light painting by Mitch Hemming. Learn the technique that changed everything for automotive photography.">
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
 :root{
-  --bg:#08080f;--bg2:#1a1a1a;--bg3:#222;
+  --bg:#08080f;--bg2:#1a1a1a;--bg3:#222;--bg4:#2c2c2c;
   --border:rgba(255,255,255,0.1);--border2:rgba(255,255,255,0.18);
   --text:#f4f4f2;--text2:#dcdce8;--text3:#aaaabc;
   --green:#3dd68c;--green-dim:rgba(61,214,140,0.08);
+  --red:#f06060;
+  --purple:#c084fc;
   --radius:12px;--radius-sm:6px;
 }
 *{box-sizing:border-box;margin:0;padding:0}
-html,body{height:100%;overflow:hidden}
+html,body{min-height:100vh}
 body{background:var(--bg);color:var(--text);font-family:'Plus Jakarta Sans',sans-serif;display:flex;flex-direction:column}
 
-/* ── Top bar ── */
-.top-bar{
-  display:flex;align-items:center;justify-content:space-between;
-  padding:14px 24px;
-  border-bottom:0.5px solid var(--border);
-  background:var(--bg);
-  flex-shrink:0;
-  z-index:10;
+/* ── Background texture ── */
+body::before{
+  content:'';position:fixed;inset:0;
+  background-image:linear-gradient(rgba(255,255,255,0.012) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,0.012) 1px,transparent 1px);
+  background-size:48px 48px;pointer-events:none;z-index:0;
 }
-.top-left{display:flex;align-items:center;gap:20px}
+body::after{
+  content:'';position:fixed;inset:0;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+  opacity:0.45;pointer-events:none;z-index:0;
+}
+
+/* ── Layout ── */
+.wrap{max-width:940px;margin:0 auto;padding:1.5rem 1.75rem;flex:1;position:relative;z-index:1;width:100%}
+
+/* ── Header ── */
+.site-header{margin-bottom:2.5rem;animation:fadeUp 0.5s ease both}
 .cc-wordmark{font-family:'Plus Jakarta Sans',sans-serif;font-size:13px;letter-spacing:0.01em}
 .wm-bold{font-weight:600;color:#d0d0ce}
 .wm-light{font-weight:400;color:#7a7a80}
-.divider{width:1px;height:18px;background:var(--border2)}
-.guide-title{font-size:14px;font-weight:600;color:var(--text);letter-spacing:-0.01em}
-.guide-pages{font-size:11px;font-family:'DM Mono',monospace;color:var(--text3);margin-left:2px}
 
-.top-right{display:flex;align-items:center;gap:10px}
-.btn-download{
-  display:inline-flex;align-items:center;gap:6px;
-  font-size:12px;font-family:'DM Mono',monospace;font-weight:500;
-  color:var(--green);text-decoration:none;
-  padding:7px 16px;border-radius:20px;
-  background:var(--green-dim);border:0.5px solid rgba(61,214,140,0.3);
-  transition:background 0.2s,border-color 0.2s;
-}
-.btn-download:hover{background:rgba(61,214,140,0.15);border-color:rgba(61,214,140,0.5)}
-.btn-download svg{width:13px;height:13px}
-.btn-back{
-  display:inline-flex;align-items:center;gap:6px;
-  font-size:12px;font-family:'DM Mono',monospace;font-weight:500;
-  color:var(--text3);text-decoration:none;
-  padding:7px 16px;border-radius:20px;
-  background:rgba(255,255,255,0.04);border:0.5px solid var(--border);
-  transition:background 0.2s,border-color 0.2s,color 0.2s;
-}
-.btn-back:hover{background:rgba(255,255,255,0.08);border-color:var(--border2);color:var(--text2)}
+/* ── Ambient orbs (more green energy) ── */
+.orb{position:fixed;border-radius:50%;filter:blur(90px);pointer-events:none;z-index:0;animation:orbFloat 9s ease-in-out infinite}
+.orb1{width:600px;height:600px;background:radial-gradient(circle,rgba(61,214,140,0.09),transparent 70%);top:-150px;right:-150px}
+.orb2{width:500px;height:500px;background:radial-gradient(circle,rgba(61,214,140,0.07),transparent 70%);bottom:-100px;left:-150px;animation-delay:4s}
+.orb3{width:400px;height:400px;background:radial-gradient(circle,rgba(96,170,255,0.05),transparent 70%);top:30%;left:30%;animation-delay:2s}
+.orb4{width:350px;height:350px;background:radial-gradient(circle,rgba(61,214,140,0.06),transparent 70%);top:70%;right:-80px;animation-delay:6s}
+@keyframes orbFloat{0%,100%{opacity:0.7}50%{opacity:1}}
 
-/* ── PDF viewer ── */
-.pdf-wrap{
-  flex:1;display:flex;
-  background:var(--bg2);
+/* ══════════════════════════════════════════
+   Hero
+   ══════════════════════════════════════════ */
+.hero{
+  display:flex;align-items:center;gap:52px;
+  margin-bottom:3rem;animation:fadeUp 0.5s 0.1s ease both;
 }
-.pdf-wrap iframe{
-  width:100%;height:100%;border:none;display:block;
+
+/* Cover with pulsing glow */
+.hero-cover{flex-shrink:0;width:340px;position:relative}
+.hero-cover-glow{
+  position:absolute;inset:-40px;
+  background:radial-gradient(ellipse at center,rgba(61,214,140,0.18) 0%,rgba(61,214,140,0.07) 35%,transparent 65%);
+  filter:blur(40px);z-index:0;
+  animation:coverPulse 4s ease-in-out infinite;
 }
+@keyframes coverPulse{0%,100%{opacity:0.5}50%{opacity:1}}
+.hero-cover img{
+  position:relative;z-index:1;
+  width:100%;height:auto;display:block;
+  border-radius:var(--radius);
+  border:0.5px solid rgba(61,214,140,0.3);
+  box-shadow:0 12px 50px rgba(0,0,0,0.5),0 0 80px rgba(61,214,140,0.1);
+}
+
+/* Hero content — more spacing */
+.hero-content{flex:1;min-width:0}
+.hero-tag{
+  display:inline-block;font-size:11px;font-family:'DM Mono',monospace;font-weight:500;
+  letter-spacing:0.1em;text-transform:uppercase;padding:5px 12px;border-radius:4px;
+  background:var(--green-dim);color:var(--green);border:0.5px solid rgba(61,214,140,0.35);
+  margin-bottom:22px;
+}
+.hero-title{font-size:clamp(34px,5vw,52px);font-weight:800;letter-spacing:-0.035em;line-height:1.05;color:var(--text);margin-bottom:22px}
+.hero-tagline{font-size:17px;color:var(--text2);font-weight:400;line-height:1.7;letter-spacing:0.01em;margin-bottom:32px}
+
+/* ── Inline gate ── */
+@keyframes shakeX{0%,100%{transform:translateX(0)}20%{transform:translateX(-6px)}40%{transform:translateX(6px)}60%{transform:translateX(-4px)}80%{transform:translateX(4px)}}
+
+.hero-gate{
+  padding-top:24px;
+  border-top:0.5px solid rgba(61,214,140,0.15);
+}
+.hero-gate-heading{
+  font-size:14px;font-weight:600;color:var(--green);
+  margin-bottom:12px;letter-spacing:-0.01em;
+}
+.hero-gate-form{display:flex;gap:8px;flex-wrap:wrap}
+.hero-gate-input{
+  flex:1;min-width:200px;
+  background:var(--bg3);border:0.5px solid var(--border2);
+  border-radius:var(--radius-sm);padding:12px 16px;font-size:15px;
+  color:var(--text);font-family:'Plus Jakarta Sans',sans-serif;outline:none;
+  transition:border-color 0.15s,box-shadow 0.15s;
+}
+.hero-gate-input::placeholder{color:var(--text3)}
+.hero-gate-input:focus{border-color:var(--green);box-shadow:0 0 0 3px rgba(61,214,140,0.15)}
+.hero-gate-input.input-error{border-color:var(--red);box-shadow:0 0 0 3px rgba(240,96,96,0.15);animation:shakeX 0.4s ease}
+.hero-gate-btn{
+  background:var(--green);border:none;border-radius:var(--radius-sm);
+  padding:12px 28px;font-size:15px;font-weight:600;color:#0e0e0e;
+  font-family:'Plus Jakarta Sans',sans-serif;cursor:pointer;white-space:nowrap;
+  transition:opacity 0.15s,transform 0.1s;
+}
+.hero-gate-btn:hover{opacity:0.85}
+.hero-gate-btn:active{transform:scale(0.97)}
+.hero-gate-note{font-size:11px;color:var(--text3);font-family:'DM Mono',monospace;margin-top:10px}
+
+/* ══════════════════════════════════════════
+   What's Inside
+   ══════════════════════════════════════════ */
+.inside-section{margin-bottom:2.5rem;animation:fadeUp 0.5s 0.2s ease both}
+.inside-label{font-size:11px;font-weight:500;color:var(--text3);text-transform:uppercase;letter-spacing:0.1em;font-family:'DM Mono',monospace;margin-bottom:14px;display:flex;align-items:center;gap:10px}
+.inside-label::after{content:'';flex:1;height:0.5px;background:linear-gradient(90deg,rgba(61,214,140,0.3),transparent)}
+.inside-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+.inside-item{
+  background:linear-gradient(135deg,rgba(61,214,140,0.06) 0%,rgba(61,214,140,0.02) 100%);
+  border:0.5px solid rgba(61,214,140,0.18);border-radius:var(--radius);
+  padding:16px 20px;display:flex;align-items:center;gap:14px;
+  transition:border-color 0.2s,background 0.2s;
+}
+.inside-item:hover{border-color:rgba(61,214,140,0.35);background:linear-gradient(135deg,rgba(61,214,140,0.1) 0%,rgba(61,214,140,0.04) 100%)}
+.inside-icon{font-size:20px;flex-shrink:0;line-height:1}
+.inside-text{font-size:15px;font-weight:500;color:var(--text);letter-spacing:-0.01em}
+
+/* ══════════════════════════════════════════
+   Bottom CTA
+   ══════════════════════════════════════════ */
+.bottom-cta{
+  text-align:center;
+  padding:2.5rem 2rem;
+  margin-bottom:1rem;
+  animation:fadeUp 0.5s 0.3s ease both;
+  position:relative;
+}
+.bottom-cta-glow{
+  position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
+  width:500px;height:200px;
+  background:radial-gradient(ellipse at center,rgba(61,214,140,0.1) 0%,transparent 70%);
+  filter:blur(50px);pointer-events:none;
+  animation:coverPulse 5s ease-in-out infinite;
+}
+.bottom-cta-text{
+  font-size:20px;font-weight:700;color:var(--text);
+  letter-spacing:-0.02em;margin-bottom:8px;
+  position:relative;z-index:1;
+}
+.bottom-cta-sub{
+  font-size:14px;color:var(--text3);line-height:1.6;
+  margin-bottom:20px;
+  position:relative;z-index:1;
+}
+.bottom-cta-btn{
+  display:inline-flex;align-items:center;gap:8px;
+  background:var(--green);border:none;border-radius:var(--radius-sm);
+  padding:14px 32px;font-size:15px;font-weight:600;color:#0e0e0e;
+  font-family:'Plus Jakarta Sans',sans-serif;cursor:pointer;
+  transition:opacity 0.15s,transform 0.1s;
+  position:relative;z-index:1;
+  box-shadow:0 0 30px rgba(61,214,140,0.15);
+}
+.bottom-cta-btn:hover{opacity:0.85}
+.bottom-cta-btn:active{transform:scale(0.97)}
+
+/* ── Footer ── */
+.footer{position:relative;z-index:1;padding:1.25rem 2rem;border-top:0.5px solid var(--border);text-align:center}
+.footer p{font-size:11px;color:var(--text3);font-family:'DM Mono',monospace;line-height:1.9}
+.footer a{color:var(--text3);text-decoration:none;border-bottom:0.5px solid var(--border2)}
+.footer a:hover{color:var(--text2)}
+
+/* ── Animations ── */
+@keyframes fadeUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
 
 /* ── Responsive ── */
-@media(max-width:600px){
-  .top-bar{padding:12px 16px;flex-wrap:wrap;gap:10px}
-  .top-left{gap:12px}
-  .guide-title{font-size:13px}
-  .divider{display:none}
-  .guide-pages{display:none}
+@media(max-width:700px){
+  .hero{flex-direction:column;gap:28px;text-align:center}
+  .hero-cover{width:240px;margin:0 auto}
+  .hero-tagline{max-width:100%}
+  .hero-gate{text-align:left}
+  .hero-gate-form{flex-direction:column}
+  .hero-gate-btn{width:100%}
+  .inside-grid{grid-template-columns:1fr}
+  .wrap{padding:1.25rem 1.25rem 2rem}
 }
 </style>
 </head>
 <body>
+<div class="orb orb1"></div>
+<div class="orb orb2"></div>
+<div class="orb orb3"></div>
+<div class="orb orb4"></div>
 
-<!-- Top bar -->
-<div class="top-bar">
-  <div class="top-left">
+<div class="wrap">
+
+  <header class="site-header">
     <div class="cc-wordmark">
       <span class="wm-bold">CONSISTENT</span><span class="wm-light"> CREATIVE</span>
     </div>
-    <div class="divider"></div>
-    <span class="guide-title">The Light Painting Method</span>
-    <span class="guide-pages">15 pages</span>
-  </div>
-  <div class="top-right"></div>
+  </header>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="hero-cover">
+      <div class="hero-cover-glow"></div>
+      <img src="cover.jpg" alt="The Light Painting Method by Mitch Hemming" width="800" height="1132">
+    </div>
+    <div class="hero-content">
+      <div class="hero-tag">Free Guide</div>
+      <h1 class="hero-title">The Light Painting Method</h1>
+      <p class="hero-tagline">Stop relying on natural light and heavy editing. Learn to control light and create images most photographers can't.</p>
+
+      <div class="hero-gate" id="gate">
+        <div class="hero-gate-heading">Get your free copy instantly</div>
+        <div class="hero-gate-form">
+          <input class="hero-gate-input" type="email" id="gate-email" placeholder="your@email.com" autocomplete="email">
+          <button class="hero-gate-btn" id="gate-submit" onclick="unlock()">Access guide →</button>
+        </div>
+        <div class="hero-gate-note">No spam. Unsubscribe anytime.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- What's Inside -->
+  <section class="inside-section">
+    <div class="inside-label">What's inside this guide</div>
+    <div class="inside-grid">
+      <div class="inside-item">
+        <div class="inside-icon">📷</div>
+        <div class="inside-text">The exact gear setup you need to get started</div>
+      </div>
+      <div class="inside-item">
+        <div class="inside-icon">📍</div>
+        <div class="inside-text">How to scout and lock in the right locations</div>
+      </div>
+      <div class="inside-item">
+        <div class="inside-icon">💡</div>
+        <div class="inside-text">Single and multi-exposure lighting techniques</div>
+      </div>
+      <div class="inside-item">
+        <div class="inside-icon">🖥️</div>
+        <div class="inside-text">The full Photoshop compositing workflow</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Bottom CTA -->
+  <section class="bottom-cta">
+    <div class="bottom-cta-glow"></div>
+    <div class="bottom-cta-text">Ready to learn the technique?</div>
+    <div class="bottom-cta-sub">15 pages covering everything from gear to the final edit. Completely free.</div>
+    <button class="bottom-cta-btn" onclick="document.getElementById('gate-email').focus();window.scrollTo({top:0,behavior:'smooth'})">Get the guide →</button>
+  </section>
+
 </div>
 
-<!-- Google Drive PDF embed -->
-<div class="pdf-wrap">
-  <iframe src="https://drive.google.com/file/d/1NFnQXj4LcQUXXrwWjcfRStZJx6MoJmdh/preview" allow="autoplay" loading="lazy"></iframe>
+<div class="footer">
+  <p>&copy; <span id="footer-year"></span> <strong>Consistent Creative Pty Ltd</strong> — All rights reserved.</p>
+  <p>Unauthorised reproduction, distribution or use of this guide is strictly prohibited.</p>
+  <p style="margin-top:5px"><a href="https://www.consistentcreative.com" target="_blank">www.ConsistentCreative.com</a></p>
 </div>
 
 <script>
-// Protect: if not unlocked, redirect back to gate
-const UNLOCK_KEY='cc_guide_lightpainting';
+document.getElementById('footer-year').textContent=new Date().getFullYear();
 
-// Dev helper: ?reset clears unlock state and redirects
+const UNLOCK_KEY='cc_guide_lightpainting';
+const KIT_FORM_ID='8988271';
+
+function isUnlocked(){
+  try{return!!localStorage.getItem(UNLOCK_KEY);}catch(e){return false;}
+}
+
 if(window.location.search.includes('reset')){
   try{localStorage.removeItem(UNLOCK_KEY);}catch(e){}
-  window.location.href='index.html?reset';
 }
 
-try{
-  if(!localStorage.getItem(UNLOCK_KEY)){
-    window.location.href='index.html';
-  }
-}catch(e){
-  window.location.href='index.html';
+if(isUnlocked()){
+  window.location.href='guide.html';
 }
+
+function unlock(){
+  const input=document.getElementById('gate-email');
+  const email=input.value.trim();
+  const valid=/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+  if(!valid){
+    input.classList.remove('input-error');
+    void input.offsetWidth;
+    input.classList.add('input-error');
+    input.focus();
+    setTimeout(()=>input.classList.remove('input-error'),1800);
+    return;
+  }
+  try{localStorage.setItem(UNLOCK_KEY,email);}catch(e){}
+  pingKit(email);
+  window.location.href='guide.html';
+}
+
+function pingKit(email){
+  fetch('https://api.convertkit.com/v3/forms/'+KIT_FORM_ID+'/subscribe',{
+    method:'POST',
+    headers:{'Content-Type':'application/json'},
+    body:JSON.stringify({api_key:'NJmhXJt48sX5WSlXYw6zRg',email:email})
+  }).catch(()=>{});
+}
+
+document.getElementById('gate-email').addEventListener('keydown',e=>{
+  if(e.key==='Enter')unlock();
+});
 </script>
 </body>
 </html>
