@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>The Light Painting Method — Consistent Creative</title>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#08080f;--bg2:#1a1a1a;--bg3:#222;
+  --border:rgba(255,255,255,0.1);--border2:rgba(255,255,255,0.18);
+  --text:#f4f4f2;--text2:#dcdce8;--text3:#aaaabc;
+  --green:#3dd68c;--green-dim:rgba(61,214,140,0.08);
+  --radius:12px;--radius-sm:6px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%;overflow:hidden}
+body{background:var(--bg);color:var(--text);font-family:'Plus Jakarta Sans',sans-serif;display:flex;flex-direction:column}
+
+/* ── Top bar ── */
+.top-bar{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:14px 24px;
+  border-bottom:0.5px solid var(--border);
+  background:var(--bg);
+  flex-shrink:0;
+  z-index:10;
+}
+.top-left{display:flex;align-items:center;gap:20px}
+.cc-wordmark{font-family:'Plus Jakarta Sans',sans-serif;font-size:13px;letter-spacing:0.01em}
+.wm-bold{font-weight:600;color:#d0d0ce}
+.wm-light{font-weight:400;color:#7a7a80}
+.divider{width:1px;height:18px;background:var(--border2)}
+.guide-title{font-size:14px;font-weight:600;color:var(--text);letter-spacing:-0.01em}
+.guide-pages{font-size:11px;font-family:'DM Mono',monospace;color:var(--text3);margin-left:2px}
+
+.top-right{display:flex;align-items:center;gap:10px}
+.btn-download{
+  display:inline-flex;align-items:center;gap:6px;
+  font-size:12px;font-family:'DM Mono',monospace;font-weight:500;
+  color:var(--green);text-decoration:none;
+  padding:7px 16px;border-radius:20px;
+  background:var(--green-dim);border:0.5px solid rgba(61,214,140,0.3);
+  transition:background 0.2s,border-color 0.2s;
+}
+.btn-download:hover{background:rgba(61,214,140,0.15);border-color:rgba(61,214,140,0.5)}
+.btn-download svg{width:13px;height:13px}
+.btn-back{
+  display:inline-flex;align-items:center;gap:6px;
+  font-size:12px;font-family:'DM Mono',monospace;font-weight:500;
+  color:var(--text3);text-decoration:none;
+  padding:7px 16px;border-radius:20px;
+  background:rgba(255,255,255,0.04);border:0.5px solid var(--border);
+  transition:background 0.2s,border-color 0.2s,color 0.2s;
+}
+.btn-back:hover{background:rgba(255,255,255,0.08);border-color:var(--border2);color:var(--text2)}
+
+/* ── PDF viewer ── */
+.pdf-wrap{
+  flex:1;display:flex;
+  background:var(--bg2);
+}
+.pdf-wrap iframe{
+  width:100%;height:100%;border:none;display:block;
+}
+
+/* ── Responsive ── */
+@media(max-width:600px){
+  .top-bar{padding:12px 16px;flex-wrap:wrap;gap:10px}
+  .top-left{gap:12px}
+  .guide-title{font-size:13px}
+  .divider{display:none}
+  .guide-pages{display:none}
+}
+</style>
+</head>
+<body>
+
+<!-- Top bar -->
+<div class="top-bar">
+  <div class="top-left">
+    <div class="cc-wordmark">
+      <span class="wm-bold">CONSISTENT</span><span class="wm-light"> CREATIVE</span>
+    </div>
+    <div class="divider"></div>
+    <span class="guide-title">The Light Painting Method</span>
+    <span class="guide-pages">15 pages</span>
+  </div>
+  <div class="top-right">
+    <a href="The_Light_Painting_Method.pdf" download class="btn-download">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+      Download
+    </a>
+    <a href="index.html" class="btn-back">← Back</a>
+  </div>
+</div>
+
+<!-- Google Drive PDF embed -->
+<div class="pdf-wrap">
+  <iframe src="https://drive.google.com/file/d/1NFnQXj4LcQUXXrwWjcfRStZJx6MoJmdh/preview" allow="autoplay" loading="lazy"></iframe>
+</div>
+
+<script>
+// Protect: if not unlocked, redirect back to gate
+const UNLOCK_KEY='cc_guide_lightpainting';
+
+// Dev helper: ?reset clears unlock state and redirects
+if(window.location.search.includes('reset')){
+  try{localStorage.removeItem(UNLOCK_KEY);}catch(e){}
+  window.location.href='index.html?reset';
+}
+
+try{
+  if(!localStorage.getItem(UNLOCK_KEY)){
+    window.location.href='index.html';
+  }
+}catch(e){
+  window.location.href='index.html';
+}
+</script>
+</body>
+</html>
