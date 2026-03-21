@@ -12,10 +12,8 @@
   --border:rgba(255,255,255,0.1);--border2:rgba(255,255,255,0.18);
   --text:#f4f4f2;--text2:#dcdce8;--text3:#aaaabc;
   --green:#3dd68c;--green-dim:rgba(61,214,140,0.08);
-  --amber:#f0a840;--amber-dim:rgba(240,168,64,0.08);
-  --blue:#60aaff;--blue-dim:rgba(96,170,255,0.08);
   --red:#f06060;
-  --purple:#c084fc;--purple-dim:rgba(192,132,252,0.08);
+  --purple:#c084fc;
   --radius:12px;--radius-sm:6px;
 }
 *{box-sizing:border-box;margin:0;padding:0}
@@ -43,25 +41,19 @@ body::after{
 .wm-bold{font-weight:600;color:#d0d0ce}
 .wm-light{font-weight:400;color:#7a7a80}
 
-/* ══════════════════════════════════════════
-   Hero — Cover + Content + Inline Gate
-   ══════════════════════════════════════════ */
+/* ── Hero ── */
 .hero{
   display:flex;align-items:center;gap:52px;
   margin-bottom:2.5rem;animation:fadeUp 0.5s 0.1s ease both;
 }
-
-/* Cover with pulsing glow */
 .hero-cover{flex-shrink:0;width:340px;position:relative}
 .hero-cover-glow{
   position:absolute;inset:-30px;
   background:radial-gradient(ellipse at center,rgba(61,214,140,0.15) 0%,rgba(61,214,140,0.06) 35%,transparent 65%);
-  filter:blur(35px);
-  z-index:0;
+  filter:blur(35px);z-index:0;
   animation:coverPulse 4s ease-in-out infinite;
 }
 @keyframes coverPulse{0%,100%{opacity:0.5;transform:scale(0.98)}50%{opacity:1;transform:scale(1.06)}}
-
 .hero-cover img{
   position:relative;z-index:1;
   width:100%;height:auto;display:block;
@@ -69,7 +61,6 @@ body::after{
   border:0.5px solid rgba(61,214,140,0.25);
   box-shadow:0 12px 50px rgba(0,0,0,0.5),0 0 80px rgba(61,214,140,0.08);
 }
-
 .hero-content{flex:1;min-width:0}
 .hero-tag{
   display:inline-block;font-size:11px;font-family:'DM Mono',monospace;font-weight:500;
@@ -80,15 +71,12 @@ body::after{
 .hero-title{font-size:clamp(34px,5vw,52px);font-weight:800;letter-spacing:-0.035em;line-height:1.05;color:var(--text);margin-bottom:20px}
 .hero-tagline{font-size:17px;color:var(--text2);font-weight:400;line-height:1.7;letter-spacing:0.01em;margin-bottom:24px}
 
-/* ── Inline gate (inside hero) ── */
+/* ── Inline gate ── */
 @keyframes shakeX{0%,100%{transform:translateX(0)}20%{transform:translateX(-6px)}40%{transform:translateX(6px)}60%{transform:translateX(-4px)}80%{transform:translateX(4px)}}
-
-.hero-gate{display:flex;flex-direction:column;gap:10px}
 .hero-gate-form{display:flex;gap:8px;flex-wrap:wrap}
 .hero-gate-input{
   flex:1;min-width:200px;
-  background:var(--bg3);
-  border:0.5px solid var(--border2);
+  background:var(--bg3);border:0.5px solid var(--border2);
   border-radius:var(--radius-sm);padding:12px 16px;font-size:15px;
   color:var(--text);font-family:'Plus Jakarta Sans',sans-serif;outline:none;
   transition:border-color 0.15s,box-shadow 0.15s;
@@ -104,112 +92,22 @@ body::after{
 }
 .hero-gate-btn:hover{opacity:0.85}
 .hero-gate-btn:active{transform:scale(0.97)}
-.hero-gate-note{font-size:11px;color:var(--text3);font-family:'DM Mono',monospace}
+.hero-gate-note{font-size:11px;color:var(--text3);font-family:'DM Mono',monospace;margin-top:10px}
 
-/* Gate hidden state */
-.hero-gate.unlocked{display:none}
-
-/* ── Unlocked banner (replaces gate in hero) ── */
-@keyframes unlockReveal{from{opacity:0;transform:translateY(-10px)}to{opacity:1;transform:translateY(0)}}
-.unlocked-banner{
-  display:none;align-items:center;gap:14px;
-  background:linear-gradient(135deg,rgba(61,214,140,0.12),rgba(61,214,140,0.06));
-  border:0.5px solid rgba(61,214,140,0.4);
-  border-radius:var(--radius);padding:1.25rem 1.5rem;margin-bottom:2rem;
-  animation:unlockReveal 0.5s ease both;
-}
-.unlocked-banner.show{display:flex}
-.unlocked-icon{font-size:28px;flex-shrink:0}
-.unlocked-text-wrap{display:flex;flex-direction:column;gap:3px}
-.unlocked-title{font-size:16px;font-weight:600;color:var(--green);letter-spacing:-0.01em}
-.unlocked-sub{font-size:12px;color:var(--text3);font-family:'DM Mono',monospace}
-
-/* ══════════════════════════════════════════
-   What's Inside
-   ══════════════════════════════════════════ */
+/* ── What's Inside ── */
 .inside-section{margin-bottom:2.5rem;animation:fadeUp 0.5s 0.2s ease both}
 .inside-label{font-size:11px;font-weight:500;color:var(--text3);text-transform:uppercase;letter-spacing:0.1em;font-family:'DM Mono',monospace;margin-bottom:14px;display:flex;align-items:center;gap:10px}
 .inside-label::after{content:'';flex:1;height:0.5px;background:linear-gradient(90deg,var(--border2),transparent)}
 .inside-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
 .inside-item{
   background:linear-gradient(135deg,rgba(61,214,140,0.06) 0%,rgba(61,214,140,0.02) 100%);
-  border:0.5px solid rgba(61,214,140,0.18);
-  border-radius:var(--radius);
-  padding:16px 20px;
-  display:flex;align-items:center;gap:14px;
+  border:0.5px solid rgba(61,214,140,0.18);border-radius:var(--radius);
+  padding:16px 20px;display:flex;align-items:center;gap:14px;
   transition:border-color 0.2s,background 0.2s;
 }
 .inside-item:hover{border-color:rgba(61,214,140,0.35);background:linear-gradient(135deg,rgba(61,214,140,0.1) 0%,rgba(61,214,140,0.04) 100%)}
 .inside-icon{font-size:20px;flex-shrink:0;line-height:1}
 .inside-text{font-size:15px;font-weight:500;color:var(--text);letter-spacing:-0.01em}
-
-/* ── PDF Section ── */
-.pdf-section{display:none;animation:fadeUp 0.5s ease both}
-.pdf-section.visible{display:block}
-
-.pdf-bar{
-  display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;
-  margin-bottom:14px;
-}
-.pdf-label{font-size:11px;font-weight:500;color:var(--text3);text-transform:uppercase;letter-spacing:0.1em;font-family:'DM Mono',monospace}
-.pdf-download{
-  display:inline-flex;align-items:center;gap:6px;
-  font-size:12px;font-family:'DM Mono',monospace;font-weight:500;
-  color:var(--green);text-decoration:none;
-  padding:6px 14px;border-radius:20px;
-  background:var(--green-dim);border:0.5px solid rgba(61,214,140,0.3);
-  transition:background 0.2s,border-color 0.2s;
-}
-.pdf-download:hover{background:rgba(61,214,140,0.15);border-color:rgba(61,214,140,0.5)}
-.pdf-download svg{width:13px;height:13px}
-
-.pdf-viewer{
-  background:var(--bg2);
-  border:0.5px solid var(--border);
-  border-radius:var(--radius);
-  overflow:hidden;
-}
-.pdf-viewer iframe{
-  width:100%;height:85vh;min-height:600px;border:none;display:block;
-}
-
-/* Mobile fallback */
-.pdf-fallback{
-  display:none;text-align:center;padding:3rem 2rem;
-  background:var(--bg2);border:0.5px solid var(--border);border-radius:var(--radius);
-}
-.pdf-fallback p{color:var(--text3);font-size:14px;margin-bottom:1.25rem;line-height:1.6}
-.pdf-fallback .btn-dl{
-  display:inline-flex;align-items:center;gap:8px;
-  background:var(--green);color:#0e0e0e;border:none;border-radius:var(--radius-sm);
-  padding:12px 24px;font-family:'Plus Jakarta Sans',sans-serif;font-size:14px;font-weight:600;
-  text-decoration:none;transition:opacity 0.2s;
-}
-.pdf-fallback .btn-dl:hover{opacity:0.85}
-
-/* ── CTA Section ── */
-.cta-section{display:none;margin-top:2rem;animation:fadeUp 0.5s 0.1s ease both}
-.cta-section.visible{display:block}
-.cta-label{font-size:11px;font-weight:500;color:var(--text3);text-transform:uppercase;letter-spacing:0.1em;font-family:'DM Mono',monospace;margin-bottom:14px;display:flex;align-items:center;gap:10px}
-.cta-label::after{content:'';flex:1;height:0.5px;background:linear-gradient(90deg,rgba(168,85,247,0.5),transparent)}
-
-.cta-card{
-  background:linear-gradient(135deg,rgba(168,85,247,0.14) 0%,rgba(139,58,220,0.08) 100%);
-  border:0.5px solid rgba(168,85,247,0.4);
-  border-radius:var(--radius);
-  box-shadow:0 0 20px rgba(168,85,247,0.06),inset 0 1px 0 rgba(255,255,255,0.04);
-  padding:28px 30px;position:relative;overflow:hidden;
-  display:flex;align-items:center;justify-content:space-between;gap:24px;
-  text-decoration:none;transition:transform 0.2s,box-shadow 0.2s;
-}
-.cta-card::after{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,#6d28d9,#a855f7,#c084fc);opacity:0.8}
-.cta-card:hover{transform:translateY(-2px);box-shadow:0 0 30px rgba(168,85,247,0.12),inset 0 1px 0 rgba(255,255,255,0.06)}
-.cta-left{flex:1}
-.cta-tag{display:inline-block;font-size:10px;font-family:'DM Mono',monospace;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;padding:3px 8px;border-radius:4px;background:rgba(168,85,247,0.18);color:#c084fc;border:0.5px solid rgba(168,85,247,0.45);margin-bottom:10px}
-.cta-name{font-size:22px;font-weight:700;letter-spacing:-0.03em;color:var(--text);margin-bottom:6px}
-.cta-desc{font-size:14px;color:var(--text2);line-height:1.6;max-width:440px}
-.cta-arrow{font-size:22px;color:#a855f7;transition:transform 0.15s,color 0.15s;flex-shrink:0}
-.cta-card:hover .cta-arrow{transform:translateX(4px);color:#fff}
 
 /* ── Footer ── */
 .footer{position:relative;z-index:1;padding:1.25rem 2rem;border-top:0.5px solid var(--border);text-align:center}
@@ -236,17 +134,6 @@ body::after{
   .hero-gate-btn{width:100%}
   .inside-grid{grid-template-columns:1fr}
   .wrap{padding:1.25rem 1.25rem 2rem}
-  .pdf-viewer iframe{height:70vh;min-height:450px}
-  .pdf-bar{flex-direction:column;align-items:flex-start}
-  .cta-card{flex-direction:column;align-items:flex-start;gap:16px;padding:22px 20px}
-  .cta-arrow{display:none}
-}
-@media(max-width:768px){
-  .pdf-viewer{display:none}
-  .pdf-fallback.active{display:block}
-}
-@media(min-width:769px){
-  .pdf-fallback{display:none !important}
 }
 </style>
 </head>
@@ -257,14 +144,12 @@ body::after{
 
 <div class="wrap">
 
-  <!-- Header -->
   <header class="site-header">
     <div class="cc-wordmark">
       <span class="wm-bold">CONSISTENT</span><span class="wm-light"> CREATIVE</span>
     </div>
   </header>
 
-  <!-- Hero — Cover + Content + Inline Gate -->
   <section class="hero">
     <div class="hero-cover">
       <div class="hero-cover-glow"></div>
@@ -274,8 +159,6 @@ body::after{
       <div class="hero-tag">Free Guide</div>
       <h1 class="hero-title">The Light Painting Method</h1>
       <p class="hero-tagline">Stop relying on natural light and heavy editing. Learn to control light and create images most photographers can't.</p>
-
-      <!-- Inline email gate -->
       <div class="hero-gate" id="gate">
         <div class="hero-gate-form">
           <input class="hero-gate-input" type="email" id="gate-email" placeholder="your@email.com" autocomplete="email">
@@ -286,16 +169,6 @@ body::after{
     </div>
   </section>
 
-  <!-- Unlocked confirmation -->
-  <div class="unlocked-banner" id="unlocked-banner">
-    <div class="unlocked-icon">📖</div>
-    <div class="unlocked-text-wrap">
-      <div class="unlocked-title">You're in. Guide unlocked.</div>
-      <div class="unlocked-sub">Scroll down to start reading.</div>
-    </div>
-  </div>
-
-  <!-- What's Inside -->
   <section class="inside-section">
     <div class="inside-label">What's inside this guide</div>
     <div class="inside-grid">
@@ -318,43 +191,8 @@ body::after{
     </div>
   </section>
 
-  <!-- PDF viewer -->
-  <section class="pdf-section" id="pdf-section">
-    <div class="pdf-bar">
-      <span class="pdf-label">The Light Painting Method — 15 pages</span>
-      <a href="The_Light_Painting_Method.pdf" download class="pdf-download">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-        Download PDF
-      </a>
-    </div>
-    <div class="pdf-viewer">
-      <iframe id="pdf-iframe" src="" loading="lazy"></iframe>
-    </div>
-    <div class="pdf-fallback" id="pdf-fallback">
-      <p>PDF viewing works best on desktop. Tap below to download and read on your device.</p>
-      <a href="The_Light_Painting_Method.pdf" download class="btn-dl">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-        Download PDF
-      </a>
-    </div>
-  </section>
-
-  <!-- CTA -->
-  <section class="cta-section" id="cta-section">
-    <div class="cta-label">✦ What's next</div>
-    <a class="cta-card" href="https://consistentcreative.com" target="_blank" rel="noopener">
-      <div class="cta-left">
-        <div class="cta-tag">Course</div>
-        <div class="cta-name">Lighting As Leverage</div>
-        <div class="cta-desc">Go deeper. Learn the full system behind professional automotive photography.</div>
-      </div>
-      <span class="cta-arrow">→</span>
-    </a>
-  </section>
-
 </div>
 
-<!-- Footer -->
 <div class="footer">
   <p>&copy; <span id="footer-year"></span> <strong>Consistent Creative Pty Ltd</strong> — All rights reserved.</p>
   <p>Unauthorised reproduction, distribution or use of this guide is strictly prohibited.</p>
@@ -365,16 +203,20 @@ body::after{
 document.getElementById('footer-year').textContent=new Date().getFullYear();
 
 const UNLOCK_KEY='cc_guide_lightpainting';
-const PDF_FILE='The_Light_Painting_Method.pdf';
 const KIT_FORM_ID='8988271';
 
 function isUnlocked(){
   try{return!!localStorage.getItem(UNLOCK_KEY);}catch(e){return false;}
 }
 
-// Dev helper: add ?reset to URL to clear unlock state for testing
+// Dev helper: ?reset clears unlock state
 if(window.location.search.includes('reset')){
   try{localStorage.removeItem(UNLOCK_KEY);}catch(e){}
+}
+
+// If already unlocked, redirect straight to guide
+if(isUnlocked()){
+  window.location.href='guide.html';
 }
 
 function unlock(){
@@ -390,31 +232,8 @@ function unlock(){
     return;
   }
   try{localStorage.setItem(UNLOCK_KEY,email);}catch(e){}
-  applyUnlocked(true);
   pingKit(email);
-}
-
-function applyUnlocked(fresh){
-  // Hide inline gate
-  document.getElementById('gate').classList.add('unlocked');
-
-  // Show banner
-  if(fresh)document.getElementById('unlocked-banner').classList.add('show');
-
-  // Show PDF
-  document.getElementById('pdf-section').classList.add('visible');
-
-  // Load PDF into iframe
-  const iframe=document.getElementById('pdf-iframe');
-  if(!iframe.src||iframe.src===''||iframe.src===window.location.href){
-    iframe.src=PDF_FILE;
-  }
-
-  // Mobile fallback
-  document.getElementById('pdf-fallback').classList.add('active');
-
-  // Show CTA
-  document.getElementById('cta-section').classList.add('visible');
+  window.location.href='guide.html';
 }
 
 function pingKit(email){
@@ -425,10 +244,6 @@ function pingKit(email){
   }).catch(()=>{});
 }
 
-// Check on load
-if(isUnlocked())applyUnlocked(false);
-
-// Allow enter key on email field
 document.getElementById('gate-email').addEventListener('keydown',e=>{
   if(e.key==='Enter')unlock();
 });
