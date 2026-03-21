@@ -44,50 +44,43 @@ body::after{
 .wm-light{font-weight:400;color:#7a7a80}
 
 /* ══════════════════════════════════════════
-   Hero — Two Column
+   Hero — Two Column, Full Width
    ══════════════════════════════════════════ */
 .hero{
-  display:flex;align-items:center;gap:48px;
-  margin-bottom:2rem;animation:fadeUp 0.5s 0.1s ease both;
+  display:flex;align-items:center;gap:52px;
+  margin-bottom:2.5rem;animation:fadeUp 0.5s 0.1s ease both;
 }
 
-/* Cover with glow */
-.hero-cover{flex-shrink:0;width:280px;position:relative}
+/* Cover with pulsing glow */
+.hero-cover{flex-shrink:0;width:340px;position:relative}
 .hero-cover-glow{
-  position:absolute;inset:-20px;
-  background:radial-gradient(ellipse at center,rgba(61,214,140,0.12) 0%,rgba(61,214,140,0.04) 40%,transparent 70%);
-  filter:blur(30px);
+  position:absolute;inset:-30px;
+  background:radial-gradient(ellipse at center,rgba(61,214,140,0.15) 0%,rgba(61,214,140,0.06) 35%,transparent 65%);
+  filter:blur(35px);
   z-index:0;
   animation:coverPulse 4s ease-in-out infinite;
 }
-@keyframes coverPulse{0%,100%{opacity:0.6;transform:scale(1)}50%{opacity:1;transform:scale(1.05)}}
-@keyframes coverFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+@keyframes coverPulse{0%,100%{opacity:0.5;transform:scale(0.98)}50%{opacity:1;transform:scale(1.06)}}
 
 .hero-cover img{
   position:relative;z-index:1;
   width:100%;height:auto;display:block;
   border-radius:var(--radius);
-  border:0.5px solid var(--border2);
-  box-shadow:0 8px 40px rgba(0,0,0,0.5),0 0 0 0.5px rgba(255,255,255,0.08);
-  animation:coverFloat 5s ease-in-out infinite;
+  border:0.5px solid rgba(61,214,140,0.25);
+  box-shadow:0 12px 50px rgba(0,0,0,0.5),0 0 80px rgba(61,214,140,0.08);
 }
 
 .hero-content{flex:1;min-width:0}
 .hero-tag{
-  display:inline-block;font-size:10px;font-family:'DM Mono',monospace;font-weight:500;
-  letter-spacing:0.1em;text-transform:uppercase;padding:4px 10px;border-radius:4px;
-  background:var(--green-dim);color:var(--green);border:0.5px solid rgba(61,214,140,0.3);
-  margin-bottom:16px;
+  display:inline-block;font-size:11px;font-family:'DM Mono',monospace;font-weight:500;
+  letter-spacing:0.1em;text-transform:uppercase;padding:5px 12px;border-radius:4px;
+  background:var(--green-dim);color:var(--green);border:0.5px solid rgba(61,214,140,0.35);
+  margin-bottom:20px;
 }
-.hero-title{font-size:clamp(28px,4.5vw,44px);font-weight:800;letter-spacing:-0.035em;line-height:1.05;color:var(--text);margin-bottom:16px}
-.hero-tagline{font-size:15px;color:var(--text2);font-weight:400;line-height:1.7;max-width:440px;letter-spacing:0.01em;margin-bottom:16px}
-.hero-cred{
-  font-size:11px;font-family:'DM Mono',monospace;color:var(--text3);
-  letter-spacing:0.03em;line-height:1.8;
-  padding-top:12px;border-top:0.5px solid var(--border);
-  max-width:400px;
-}
-.hero-cred span{color:var(--text2)}
+.hero-title{font-size:clamp(34px,5vw,52px);font-weight:800;letter-spacing:-0.035em;line-height:1.05;color:var(--text);margin-bottom:20px}
+.hero-title .accent{color:var(--green)}
+.hero-tagline{font-size:17px;color:var(--text2);font-weight:400;line-height:1.7;letter-spacing:0.01em}
+.hero-author{font-size:13px;color:var(--text3);font-family:'DM Mono',monospace;margin-top:16px;letter-spacing:0.03em}
 
 /* ══════════════════════════════════════════
    What's Inside
@@ -97,55 +90,54 @@ body::after{
 .inside-label::after{content:'';flex:1;height:0.5px;background:linear-gradient(90deg,var(--border2),transparent)}
 .inside-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
 .inside-item{
-  background:var(--bg2);
-  border:0.5px solid var(--border);
+  background:linear-gradient(135deg,rgba(61,214,140,0.06) 0%,rgba(61,214,140,0.02) 100%);
+  border:0.5px solid rgba(61,214,140,0.18);
   border-radius:var(--radius);
-  padding:16px 18px;
-  display:flex;align-items:flex-start;gap:12px;
+  padding:16px 20px;
+  display:flex;align-items:center;gap:14px;
   transition:border-color 0.2s,background 0.2s;
 }
-.inside-item:hover{border-color:var(--border2);background:var(--bg3)}
-.inside-icon{font-size:18px;flex-shrink:0;line-height:1.4}
-.inside-text{flex:1}
-.inside-title{font-size:14px;font-weight:600;color:var(--text);margin-bottom:3px;letter-spacing:-0.01em}
-.inside-desc{font-size:12px;color:var(--text3);line-height:1.5}
+.inside-item:hover{border-color:rgba(61,214,140,0.35);background:linear-gradient(135deg,rgba(61,214,140,0.1) 0%,rgba(61,214,140,0.04) 100%)}
+.inside-icon{font-size:20px;flex-shrink:0;line-height:1}
+.inside-text{font-size:15px;font-weight:500;color:var(--text);letter-spacing:-0.01em}
 
 /* ── Gate ── */
 @keyframes shakeX{0%,100%{transform:translateX(0)}20%{transform:translateX(-6px)}40%{transform:translateX(6px)}60%{transform:translateX(-4px)}80%{transform:translateX(4px)}}
 @keyframes unlockReveal{from{opacity:0;transform:translateY(-10px)}to{opacity:1;transform:translateY(0)}}
-@keyframes gateGlow{0%,100%{box-shadow:0 0 20px rgba(255,255,255,0.03),0 0 0 1px rgba(255,255,255,0.12)}50%{box-shadow:0 0 35px rgba(255,255,255,0.06),0 0 0 1px rgba(255,255,255,0.22)}}
+@keyframes gateGlow{0%,100%{box-shadow:0 0 25px rgba(61,214,140,0.06),0 0 0 1px rgba(61,214,140,0.15)}50%{box-shadow:0 0 45px rgba(61,214,140,0.12),0 0 0 1px rgba(61,214,140,0.3)}}
 
 .gate{
-  background:linear-gradient(135deg,rgba(255,255,255,0.06) 0%,rgba(255,255,255,0.02) 100%);
-  border:0.5px solid rgba(255,255,255,0.15);
-  border-radius:var(--radius);padding:2rem 2.25rem;margin-bottom:2.5rem;
+  background:linear-gradient(135deg,rgba(61,214,140,0.08) 0%,rgba(61,214,140,0.02) 100%);
+  border:0.5px solid rgba(61,214,140,0.25);
+  border-radius:var(--radius);padding:2.25rem 2.5rem;margin-bottom:2.5rem;
   transition:all 0.4s;position:relative;overflow:hidden;
   animation:gateGlow 3s ease-in-out infinite,fadeUp 0.5s 0.25s ease both;
 }
-.gate::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,rgba(255,255,255,0.2),transparent)}
+.gate::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,rgba(61,214,140,0.4),transparent)}
 .gate.unlocked{display:none}
-.gate-lock-bg{font-size:120px;position:absolute;right:-10px;top:50%;transform:translateY(-50%);opacity:0.04;line-height:1;pointer-events:none;user-select:none}
-.gate-title{font-size:20px;font-weight:600;color:var(--text);margin-bottom:6px;letter-spacing:-0.02em}
-.gate-sub{font-size:13px;color:var(--text2);margin-bottom:1.25rem;line-height:1.6;font-family:'DM Mono',monospace}
-.gate-form{display:flex;gap:8px;flex-wrap:wrap}
+.gate-lock-bg{font-size:140px;position:absolute;right:-10px;top:50%;transform:translateY(-50%);opacity:0.03;line-height:1;pointer-events:none;user-select:none}
+.gate-title{font-size:22px;font-weight:700;color:var(--text);margin-bottom:8px;letter-spacing:-0.02em}
+.gate-sub{font-size:14px;color:var(--text2);margin-bottom:1.5rem;line-height:1.6;font-family:'DM Mono',monospace}
+.gate-form{display:flex;gap:10px;flex-wrap:wrap}
 .gate-input{
   flex:1;min-width:220px;
   background:var(--bg3);
   border:0.5px solid var(--border2);
-  border-radius:var(--radius-sm);padding:10px 14px;font-size:14px;
+  border-radius:var(--radius-sm);padding:12px 16px;font-size:15px;
   color:var(--text);font-family:'Plus Jakarta Sans',sans-serif;outline:none;transition:border-color 0.15s,box-shadow 0.15s;
 }
 .gate-input::placeholder{color:var(--text3)}
-.gate-input:focus{border-color:var(--green);box-shadow:0 0 0 3px rgba(61,214,140,0.1)}
+.gate-input:focus{border-color:var(--green);box-shadow:0 0 0 3px rgba(61,214,140,0.15)}
 .gate-input.input-error{border-color:var(--red);box-shadow:0 0 0 3px rgba(240,96,96,0.15);animation:shakeX 0.4s ease}
 .gate-btn{
   background:var(--green);border:none;border-radius:var(--radius-sm);
-  padding:10px 22px;font-size:14px;font-weight:600;color:#0e0e0e;
+  padding:12px 28px;font-size:15px;font-weight:600;color:#0e0e0e;
   font-family:'Plus Jakarta Sans',sans-serif;cursor:pointer;white-space:nowrap;
-  transition:opacity 0.15s;
+  transition:opacity 0.15s,transform 0.1s;
 }
 .gate-btn:hover{opacity:0.85}
-.gate-note{font-size:11px;color:var(--text3);font-family:'DM Mono',monospace;margin-top:10px}
+.gate-btn:active{transform:scale(0.97)}
+.gate-note{font-size:11px;color:var(--text3);font-family:'DM Mono',monospace;margin-top:12px}
 
 /* Unlocked success banner */
 .unlocked-banner{
@@ -248,9 +240,8 @@ body::after{
 /* ── Responsive ── */
 @media(max-width:700px){
   .hero{flex-direction:column;gap:28px;text-align:center}
-  .hero-cover{width:220px;margin:0 auto}
+  .hero-cover{width:240px;margin:0 auto}
   .hero-tagline{max-width:100%}
-  .hero-cred{max-width:100%;margin:0 auto}
   .inside-grid{grid-template-columns:1fr}
   .wrap{padding:1.25rem 1.25rem 2rem}
   .gate-form{flex-direction:column}
@@ -288,49 +279,35 @@ body::after{
   <section class="hero">
     <div class="hero-cover">
       <div class="hero-cover-glow"></div>
-      <img src="cover.jpg" alt="The Light Painting Method by Mitch Hemming" width="600" height="848">
+      <img src="cover.jpg" alt="The Light Painting Method by Mitch Hemming" width="800" height="1132">
     </div>
     <div class="hero-content">
       <div class="hero-tag">Free Guide</div>
-      <h1 class="hero-title">The Light Painting<br>Method</h1>
+      <h1 class="hero-title">The Light<br>Painting<br><span class="accent">Method</span></h1>
       <p class="hero-tagline">Stop relying on natural light and heavy editing. Learn to control light and create images most photographers can't.</p>
-      <div class="hero-cred">
-        <span>15 years experience</span> · Hundreds of shoots · Trusted by major automotive brands
-      </div>
+      <p class="hero-author">By Mitch Hemming</p>
     </div>
   </section>
 
   <!-- What's Inside -->
   <section class="inside-section">
-    <div class="inside-label">What's inside</div>
+    <div class="inside-label">What's inside this guide</div>
     <div class="inside-grid">
       <div class="inside-item">
         <div class="inside-icon">📷</div>
-        <div class="inside-text">
-          <div class="inside-title">Gear Setup</div>
-          <div class="inside-desc">The exact camera, tripod and LED setup. No expensive kit required.</div>
-        </div>
+        <div class="inside-text">The exact gear setup you need to get started</div>
       </div>
       <div class="inside-item">
         <div class="inside-icon">📍</div>
-        <div class="inside-text">
-          <div class="inside-title">Location Scouting</div>
-          <div class="inside-desc">How to find and lock in the right locations using Google Maps.</div>
-        </div>
+        <div class="inside-text">How to scout and lock in the right locations</div>
       </div>
       <div class="inside-item">
         <div class="inside-icon">💡</div>
-        <div class="inside-text">
-          <div class="inside-title">Lighting Techniques</div>
-          <div class="inside-desc">Single exposure, multi-exposure and how to handle black cars.</div>
-        </div>
+        <div class="inside-text">Single and multi-exposure lighting techniques</div>
       </div>
       <div class="inside-item">
         <div class="inside-icon">🖥️</div>
-        <div class="inside-text">
-          <div class="inside-title">Photoshop Workflow</div>
-          <div class="inside-desc">Layer stacking, blend modes, masking and the final colour grade.</div>
-        </div>
+        <div class="inside-text">The full Photoshop compositing workflow</div>
       </div>
     </div>
   </section>
